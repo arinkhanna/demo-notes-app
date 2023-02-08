@@ -1,8 +1,10 @@
-import { Table } from "@serverless-stack/resources";
+import { Bucket, Table } from "@serverless-stack/resources";
 
 export function StorageStack({ stack, app }) {
-  // Create the DynamoDB table
-  const table = new Table(stack, "Notes", {
+    // Create an S3 bucket
+    const bucket = new Bucket(stack, "Uploads");
+    // Create the DynamoDB table
+    const table = new Table(stack, "Notes", {
     fields: {
       userId: "string",
       noteId: "string",
@@ -12,5 +14,6 @@ export function StorageStack({ stack, app }) {
 
   return {
     table,
+    bucket,
   };
 }
